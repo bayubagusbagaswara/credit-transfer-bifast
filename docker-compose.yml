@@ -1,0 +1,16 @@
+version: "4"
+services:
+  mysql-db:
+    container_name: credit-transfer-bifast
+    image: mysql:latest
+    restart: always
+    #    set password mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+    # The port must be different, because port 3309 is already used for another service
+    # check unused ports in docker desktop
+    ports:
+      - "3310:3306"
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
